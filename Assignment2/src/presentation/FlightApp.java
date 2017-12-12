@@ -11,6 +11,7 @@ public class FlightApp {
 			
 			CsvReader csvReader = new CsvReader("File Read Thread");
 			csvReader.start();
+			InputHandler.query();
 			
 		}catch (Exception e) {
 			
