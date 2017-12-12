@@ -9,30 +9,48 @@ import data.Flight;
 
 public class FlightCollection {
 
-	private static Map<String, List<Flight>> flightList = new HashMap<String, List<Flight>>();
+	 static FlightCollection flightCollection = null;
+	
+	
+	
+	private FlightCollection() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public static FlightCollection getInstance() {
+		if(flightCollection == null){
+			flightCollection = new FlightCollection();
+		}
+		return flightCollection;
+	}
+
+
+
+	private  Map<String, List<Flight>> flightList = new HashMap<String, List<Flight>>();
 
 	
 
-	public static Map<String, List<Flight>> getFlightList() {
+	public  Map<String, List<Flight>> getFlightList() {
 		return flightList;
 	}
 
 
 
-	public static void setFlightList(Map<String, List<Flight>> flightList) {
-		FlightCollection.flightList = flightList;
+	public  void setFlightList(Map<String, List<Flight>> flightList) {
+		this.flightList = flightList;
 	}
 
 
 
-	public static void addFlight(String key, Flight flight) {
+	public  void addFlight(String key, Flight flight) {
 
 		if (flightList.containsKey(key)) {
 			flightList.get(key).add(flight);
 		} else {
 			List<Flight> fList = new ArrayList<>();
 			fList.add(flight);
-			FlightCollection.flightList.put(key, fList);
+			this.flightList.put(key, fList);
 		}
 	}
 	

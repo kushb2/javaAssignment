@@ -29,10 +29,10 @@ public class InputHandler {
 			System.out.print("Enter , seprated values : ");
 			System.out.println("depatrure location , Arrival Location ,  Date , Class");
 			String[] input = br.readLine().split(",");
-			flightSearch.deptLoc = input[0];
-			flightSearch.arrLoc = input[1];
-			flightSearch.flightDate = LocalDate.parse(input[2], format);
-			flightSearch.flightClass = (EnumFlightClass) EnumFlightClass.valueOf(input[3]);
+			flightSearch.setDeptLoc(input[0]);
+			flightSearch.setArrLoc(input[1]);
+			flightSearch.setFlightDate(LocalDate.parse(input[2], format));
+			flightSearch.setFlightClass((EnumFlightClass) EnumFlightClass.valueOf(input[3]));
 
 			FlightFinder.find(flightSearch);
 			System.out.print("Want to Find more Flight ( y/n):");
@@ -44,5 +44,4 @@ public class InputHandler {
 		}
 		return res;
 	}
-
 }

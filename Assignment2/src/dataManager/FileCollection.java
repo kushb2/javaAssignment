@@ -4,33 +4,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
- * collection of all files absoulute path
+ * collection of all files  path
  */
 public class FileCollection {
 
-	
-	
-	
-	private static List<String> listFileName = new ArrayList<String>();
+	 static FileCollection fileCollection = null;
+		
+		
+		
+		private FileCollection() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+		
+		public static FileCollection getInstance() {
+			if(fileCollection == null){
+				fileCollection = new FileCollection();
+			}
+			return fileCollection;
+		}
+
 
 	
 	
-	public static List<String> getListFileName() {
+	
+	private  List<String> listFileName = new ArrayList<String>();
+
+	public  List<String> getListFileName() {
 		return listFileName;
 	}
 
-
-
-	public static void setListFileName(List<String> listFileName) {
-		FileCollection.listFileName = listFileName;
+	public  void setListFileName(List<String> listFileName) {
+		this.listFileName = listFileName;
 	}
 
-
-
-	public static void addFileName(String fileName){
+	public  void addFileName(String fileName) {
 		listFileName.add(fileName);
 	}
-
-	
-	
 }
