@@ -1,28 +1,28 @@
-package bll;
+package com.nagarro.bill;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import shared.Item;
 import shared.ItemType;
 
 public class TaxManager {
 
-	private static TaxManager manager = new TaxManager();
+	private static TaxManager manager;
 
 	private TaxManager() {
 	}
 
 	public static TaxManager getInstance() {
+		if(manager == null){
+			manager = new TaxManager();
+		}
 		return manager;
 	}
 
 	List<Item> listItem = new ArrayList<>();
 
-	public String Add(String[] inputData) {
+	public String add(String[] inputData) {
 		Item item = getType(inputData);
 		return item.toString();
 	}
@@ -34,13 +34,13 @@ public class TaxManager {
 			Double price = Double.parseDouble(inputData[1]);
 			int quantity = Integer.parseInt(inputData[2]);
 			ItemType type = ItemType.values()[Integer.parseUnsignedInt(inputData[3])];
-			if (type.equals(ItemType.Raw))
+			if (type.equals(ItemType.RAW)) {
 				item = new RawItem(name, price, quantity, type);
-			else if (type.equals(ItemType.Imported))
+			} else if (type.equals(ItemType.IMPORTED))
 				item = new ImortedItem(name, price, quantity, type);
-			else if (type.equals(ItemType.Manufactured))
+			else if (type.equals(ItemType.MANUFACTURED))
 				item = new ManufacturedItem(name, price, quantity, type);
-			
+
 		} catch (Exception e) {
 			throw e;
 		}

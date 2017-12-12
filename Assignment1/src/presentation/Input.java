@@ -1,42 +1,56 @@
 package presentation;
 
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
-import bll.TaxManager;
-import bll.Validator;
+import com.nagarro.bill.TaxManager;
+import com.nagarro.bill.Validator;
+
 import shared.Constants;
+import shared.EnumReader;
+import utility.CustomException;
+import utility.ReaderWriterUtility;
 
 public class Input {
-	public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-	public static void start() {
+	/*
+	 * take input from user add in cache return the tax on the product
+	 */
+	public static void start() throws Exception {
 		boolean isContinue = false;
-		String[] input;
 		try {
 			do {
 				input();
 				System.out.println(Constants.ADD_MORE);
-				isContinue = br.readLine().equals("Y") ? true : false;
+				isContinue = ((BufferedReader) ReaderWriterUtility.getInstance(EnumReader.BUFFER_READER)).readLine()
+						.equals("Y") ? true : false;
 			} while (isContinue);
+			System.exit(0);
+		} catch (CustomException ex) {
+			new CustomException(ex.getMessage());
+		} catch (IOException e) {
+			new CustomException(e.toString());
 		} catch (Exception e) {
-			e.printStackTrace();
+			new CustomException(e.toString());
 		}
 
 	}
-	
-	
+
+	/*
+	 * validate user input
+	 */
 	private static void input() throws Exception {
 		boolean isValid = true;
 		try {
 			do {
 				inputMsg();
-				String[] input = br.readLine().split(" ");
+				String[] input = ((BufferedReader) ReaderWriterUtility.getInstance(EnumReader.BUFFER_READER)).readLine()
+						.split(" ");
 				isValid = Validator.validate(input);
-				String res = TaxManager.getInstance().Add(input);
-				System.out.println(res);
+				if (isValid) {
+					String res = TaxManager.getInstance().add(input);
+					System.out.println(res);
+				}
 			} while (!isValid);
 		} catch (Exception e) {
 			throw e;
@@ -44,12 +58,12 @@ public class Input {
 
 	}
 
+	/*
+	 * print input msg format on console
+	 */
 	private static void inputMsg() {
-//		System.out.println("\f");
 		System.out.println(Constants.INPUT_MSG);
 		System.out.println(Constants.TYPE);
 	}
-
-	
 
 }

@@ -1,5 +1,5 @@
 package shared;
 
 public enum ItemType {
-	Raw, Manufactured, Imported
+	RAW, MANUFACTURED, IMPORTED
 }

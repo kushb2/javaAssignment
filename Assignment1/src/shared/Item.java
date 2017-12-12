@@ -1,6 +1,6 @@
 package shared;
 
-import utility.StringWriter;
+import utility.ReaderWriterUtility;
 
 public abstract class Item {
 
@@ -70,7 +70,7 @@ public abstract class Item {
 	
 	@Override
 	public String toString() {
-		StringBuilder br = StringWriter.getInstance();
+		StringBuilder br = (StringBuilder) ReaderWriterUtility.getInstance(EnumReader.STRING_BUILDRR);
 		br.append("name : "  + name + "\n");
 		br.append("price : " + price + "\n");
 		br.append("quantity : " + quantity + "\n");
